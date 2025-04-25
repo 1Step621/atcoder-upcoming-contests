@@ -9,6 +9,7 @@ pub struct Contest {
     pub name: String,
     pub duration: u32, // in minutes
     pub rated_range: String,
+    pub url: String,
 }
 
 #[derive(Debug, Clone, Default)]

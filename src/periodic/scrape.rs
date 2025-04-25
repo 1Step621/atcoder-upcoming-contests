@@ -40,20 +40,16 @@ pub async fn scrape(state: &State) {
 
             let rated_range = rated_range.to_string();
 
-            let name = row
-                .select(&Selector::parse("a").unwrap())
-                .nth(1)
-                .unwrap()
-                .text()
-                .next()
-                .unwrap()
-                .to_string();
+            let name_element = row.select(&Selector::parse("a").unwrap()).nth(1).unwrap();
+            let name = name_element.text().next().unwrap().to_string();
+            let url = format!("https://atcoder.jp{}", name_element.value().attr("href").unwrap().to_string());
 
             Contest {
                 start_time,
                 name,
                 duration,
                 rated_range,
+                url,
             }
         })
         .collect::<Vec<_>>();
