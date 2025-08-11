@@ -15,7 +15,7 @@ async fn get_state(Extension(state): Extension<State>) -> Result<impl IntoRespon
 
 #[tokio::main]
 async fn main() -> Result<(), anyhow::Error> {
-    dotenv()?;
+    let _ = dotenv();
 
     let state = State::default();
 
