@@ -1,6 +1,6 @@
 use std::{convert::Infallible, env};
 
-use axum::{http::StatusCode, response::IntoResponse, routing::get, Extension, Json, Router};
+use axum::{Extension, Json, Router, http::StatusCode, response::IntoResponse, routing::get};
 use dotenvy::dotenv;
 use state::State;
 use tokio::net::TcpListener;
@@ -14,8 +14,8 @@ async fn get_state(Extension(state): Extension<State>) -> Result<impl IntoRespon
 }
 
 #[tokio::main]
-async fn main() {
-    dotenv().expect("Failed to load .env file");
+async fn main() -> Result<(), anyhow::Error> {
+    dotenv()?;
 
     let state = State::default();
 
@@ -25,10 +25,12 @@ async fn main() {
         .route("/", get(get_state))
         .layer(Extension(state));
 
-    let host = env::var("HOST").expect("Missing HOST environment variable");
-    let port = env::var("PORT").expect("Missing PORT environment variable");
+    let host = env::var("HOST")?;
+    let port = env::var("PORT")?;
     let listener = TcpListener::bind(format!("{}:{}", host, port))
         .await
         .unwrap();
-    axum::serve(listener, app).await.unwrap();
+    axum::serve(listener, app).await?;
+
+    Ok(())
 }
