@@ -1,6 +1,6 @@
 # AtCoder Upcoming Contests
 1日1回AtCoderで予定されたコンテストをスクレイピングするWebサーバー実装です。  
-Shuttleでデプロイしています。(https://atcoder-upcoming-contests-cs7x.shuttle.app/)
+Renderでデプロイしています。(https://atcoder-upcoming-contests.onrender.com/)
 
 ## レスポンス
 `GET /`
