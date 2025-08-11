@@ -1,14 +1,13 @@
 [package]
+edition = "2024"
 name = "atcoder-upcoming-contests"
 version = "0.1.0"
-edition = "2021"
 
 [dependencies]
-axum = "0.8.1"
-chrono = "0.4.40"
-reqwest = "0.12.15"
+axum = "0.8.4"
+chrono = {version = "0.4.41", features = ["serde"]}
+dotenvy = "0.15.7"
+reqwest = "0.12.22"
 scraper = "0.23.1"
-serde = "1.0.219"
-shuttle-axum = "0.53.0"
-shuttle-runtime = "0.53.0"
-tokio = "1.28.2"
+serde = {version = "1.0.219", features = ["derive"]}
+tokio = {version = "1.47.1", features = ["rt-multi-thread"]}
